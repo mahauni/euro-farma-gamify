@@ -13,6 +13,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool _passwordVisible = false;
   bool _denySpaces = false;
+  final _formKey = GlobalKey<FormState>();
+  String email = "";
+  String password = "";
 
   @override
   Widget build(BuildContext context) {
@@ -26,69 +29,96 @@ class _LoginPageState extends State<LoginPage> {
           Expanded(
             child: Container(
               alignment: Alignment.center,
-              child: ListView(
-                padding: EdgeInsets.all(10.0),
-                shrinkWrap: true,
-                children: [
-                  Text("E-mail"),
-                  TextField(
-                    inputFormatters: [
-                      if (_denySpaces)
-                        FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                    ],
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: "Enter the email here",
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text("Senha"),
-                  TextField(
-                    inputFormatters: [
-                      if (_denySpaces)
-                        FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                    ],
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: "Enter the email here",
-                      suffixIcon: IconButton(
-                        splashColor: Colors.transparent,
-                        icon: Icon(
-                          _passwordVisible
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                        ),
-                        iconSize: 20,
-                        onPressed: () {
-                          setState(() {
-                            _passwordVisible = !_passwordVisible;
-                          });
-                        },
+              child: Form(
+                key: _formKey,
+                child: ListView(
+                  padding: EdgeInsets.all(10.0),
+                  shrinkWrap: true,
+                  children: [
+                    Text("E-mail"),
+                    TextFormField(
+                      onSaved: (value) {email = value!;},
+                      inputFormatters: [
+                        if (_denySpaces)
+                          FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                      ],
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Plese enter a email";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: "Enter the email here",
                       ),
                     ),
-                    autocorrect: false,
-                    enableSuggestions: false,
-                    obscureText: !_passwordVisible,
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  SizedBox(
-                    height: 40,
-                    child: TextButton(
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.white10)),
-                      onPressed: () {},
-                      child: Text("Enter"),
+                    SizedBox(
+                      height: 15,
                     ),
-                  ),
-                ],
+                    Text("Senha"),
+                    TextFormField(
+                      onSaved: (value) {password = value!;},
+                      inputFormatters: [
+                        if (_denySpaces)
+                          FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                      ],
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Plese enter a password";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: "Enter the email here",
+                        suffixIcon: IconButton(
+                          splashColor: Colors.transparent,
+                          icon: Icon(
+                            _passwordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          ),
+                          iconSize: 20,
+                          onPressed: () {
+                            setState(() {
+                              _passwordVisible = !_passwordVisible;
+                            });
+                          },
+                        ),
+                      ),
+                      autocorrect: false,
+                      enableSuggestions: false,
+                      obscureText: !_passwordVisible,
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    SizedBox(
+                      height: 40,
+                      child: TextButton(
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Colors.white10)),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            // save all the values in the variables
+                            _formKey.currentState!.save();
+                            
+                            // test if the form is validated
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Processing Data')),
+                            );
+                          }
+                        },
+                        child: Text("Enter"),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
+          )
         ],
       ),
     );
