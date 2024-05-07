@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:euro_farma_gamify/pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -37,7 +38,9 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Text("E-mail"),
                     TextFormField(
-                      onSaved: (value) {email = value!;},
+                      onSaved: (value) {
+                        email = value!;
+                      },
                       inputFormatters: [
                         if (_denySpaces)
                           FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -58,7 +61,9 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Text("Senha"),
                     TextFormField(
-                      onSaved: (value) {password = value!;},
+                      onSaved: (value) {
+                        password = value!;
+                      },
                       inputFormatters: [
                         if (_denySpaces)
                           FilteringTextInputFormatter.deny(RegExp(r'\s')),
@@ -104,10 +109,16 @@ class _LoginPageState extends State<LoginPage> {
                           if (_formKey.currentState!.validate()) {
                             // save all the values in the variables
                             _formKey.currentState!.save();
-                            
+
                             // test if the form is validated
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Processing Data')),
+                            );
+
+                            Navigator.pushReplacementNamed(
+                              context,
+                              '/main',
+                              arguments: {}
                             );
                           }
                         },

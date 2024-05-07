@@ -1,4 +1,5 @@
 import 'package:euro_farma_gamify/pages/login_page.dart';
+import 'package:euro_farma_gamify/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
 import 'constants.dart';
@@ -16,6 +17,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      initialRoute: "/login",
+      routes: {
+        "/login": (context) => const LoginPage(),
+        "/main": (context) => const MainPage(),
+      },
       theme: ThemeData.dark().copyWith(
         primaryColor: backgroundColor,
         scaffoldBackgroundColor: backgroundColor,
