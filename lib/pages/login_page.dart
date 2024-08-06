@@ -13,7 +13,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _passwordVisible = false;
-  bool _denySpaces = false;
+  final bool _denySpaces = false;
   final _formKey = GlobalKey<FormState>();
   String email = "";
   String password = "";
@@ -103,8 +103,8 @@ class _LoginPageState extends State<LoginPage> {
                       height: 40,
                       child: TextButton(
                         style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                Colors.white10)),
+                            backgroundColor:
+                                WidgetStateProperty.all<Color>(Colors.white10)),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             // save all the values in the variables
@@ -115,10 +115,16 @@ class _LoginPageState extends State<LoginPage> {
                               const SnackBar(content: Text('Processing Data')),
                             );
 
-                            Navigator.pushReplacementNamed(
+                            // if the user is validated, clear the data
+                            _formKey.currentState!.reset();
+
+                            Navigator.pushNamed(
                               context,
                               '/main',
-                              arguments: {}
+                              arguments: MainScreenArguments(
+                                1, // id
+                                "Lucas Raoni", // name
+                              ),
                             );
                           }
                         },

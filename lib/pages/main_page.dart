@@ -4,6 +4,13 @@ import 'package:flutter/material.dart';
 
 import '../components/custom_card.dart';
 
+class MainScreenArguments {
+  final int id;
+  final String name;
+
+  MainScreenArguments(this.id, this.name);
+}
+
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
@@ -14,33 +21,44 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
-    // ModalRoute.of(context)?.settings.arguments; way to receive the arguments
+    final args =
+        ModalRoute.of(context)?.settings.arguments as MainScreenArguments;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Main Page'),
+        title: Text('Main Page, Hello ${args.name}'),
         centerTitle: true,
       ),
       body: Column(
         children: [
-          Expanded(
-            child: CustomCard(),
+          ListView(
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            children: [
+              // <Widget>[
+
+              // ]
+            ],
           ),
           Expanded(
-            child: Container(
-              alignment: Alignment.center,
+            child: CustomCard(
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Expanded(
-                    child: CustomCard(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Quiz"),
-                        ],
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.zero),
+                        ),
                       ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/training',
+                            arguments: {args.id});
+                      },
+                      child: Text('Treinamento 1'),
                     ),
                   ),
-                  Expanded(child: CustomCard()),
                 ],
               ),
             ),
