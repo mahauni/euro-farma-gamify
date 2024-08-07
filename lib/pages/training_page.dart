@@ -4,6 +4,12 @@ import 'package:flutter/material.dart';
 
 import '../components/custom_card.dart';
 
+class TrainingPageArguments {
+  final int trainingId;
+
+  TrainingPageArguments(this.trainingId);
+}
+
 class TrainingPage extends StatefulWidget {
   const TrainingPage({super.key});
 
@@ -14,10 +20,11 @@ class TrainingPage extends StatefulWidget {
 class _TrainingPageState extends State<TrainingPage> {
   @override
   Widget build(BuildContext context) {
-    // ModalRoute.of(context)?.settings.arguments; way to receive the arguments
+    final args =
+        ModalRoute.of(context)?.settings.arguments as TrainingPageArguments;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Treinamento'),
+        title: Text('Treinamento ${args.trainingId}'),
         centerTitle: true,
       ),
       body: Column(

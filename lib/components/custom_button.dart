@@ -4,18 +4,17 @@ import 'package:euro_farma_gamify/components/custom_card.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  final Widget? child;
-  final VoidCallback? onPressed;
+  final int training;
+  final VoidCallback onPressed;
 
-  const CustomButton({super.key, this.child, this.onPressed});
+  const CustomButton(
+      {super.key, required this.training, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: CustomCard(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
               child: TextButton(
@@ -24,10 +23,8 @@ class CustomButton extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.zero),
                   ),
                 ),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/training', arguments: {});
-                },
-                child: Text('Treinamento 1'),
+                onPressed: onPressed,
+                child: Text('Treinamento ${training.toString()}'),
               ),
             ),
           ],

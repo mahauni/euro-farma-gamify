@@ -115,13 +115,10 @@ class _LoginPageState extends State<LoginPage> {
                               const SnackBar(content: Text('Processing Data')),
                             );
 
-                            // if the user is validated, clear the data
-                            _formKey.currentState!.reset();
-
-                            Navigator.pushNamed(
+                            Navigator.pushReplacementNamed(
                               context,
                               '/main',
-                              arguments: MainScreenArguments(
+                              arguments: MainPageArguments(
                                 1, // id
                                 "Lucas Raoni", // name
                               ),
