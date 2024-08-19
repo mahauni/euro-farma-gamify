@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:euro_farma_gamify/components/custom_card.dart';
+import 'package:euro_farma_gamify/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -13,21 +13,22 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: CustomCard(
-        child: Row(
-          children: [
-            Expanded(
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.zero),
-                  ),
-                ),
-                onPressed: onPressed,
-                child: Text('Treinamento ${training.toString()}'),
-              ),
-            ),
-          ],
+      child: Container(
+        padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+        margin: EdgeInsets.all(7.0),
+        decoration: BoxDecoration(
+          color: activeCardColour,
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: MaterialButton(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.zero),
+          ),
+          hoverColor: activeCardColour,
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          onPressed: onPressed,
+          child: Text('Treinamento ${training.toString()}'),
         ),
       ),
     );

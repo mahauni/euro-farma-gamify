@@ -35,14 +35,19 @@ class _MainPageState extends State<MainPage> {
             child: ListView(
               scrollDirection: Axis.vertical,
               children: <Widget>[
-                ...trainings
-                    .map<Widget>((int e) => CustomButton(
+                ...trainings.map<Widget>(
+                  (int e) => Row(
+                    children: [
+                      CustomButton(
                         training: e,
                         onPressed: () {
                           Navigator.pushNamed(context, '/training',
                               arguments: TrainingPageArguments(e));
-                        }))
-                    .toList()
+                        },
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           )
