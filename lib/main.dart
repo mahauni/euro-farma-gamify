@@ -1,3 +1,4 @@
+import 'package:euro_farma_gamify/pages/handout_page.dart';
 import 'package:euro_farma_gamify/pages/login_page.dart';
 import 'package:euro_farma_gamify/pages/main_page.dart';
 import 'package:euro_farma_gamify/pages/training_page.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         "/login": (context) => const LoginPage(),
         "/main": (context) => const MainPage(),
         "/training": (context) => const TrainingPage(),
+        "/handout": (context) => const HandoutPage(),
       },
       theme: ThemeData.dark().copyWith(
         primaryColor: backgroundColor,

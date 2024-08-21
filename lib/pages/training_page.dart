@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:euro_farma_gamify/components/custom_button.dart';
+import 'package:euro_farma_gamify/pages/handout_page.dart';
 import 'package:flutter/material.dart';
-
-import '../components/custom_card.dart';
 
 class TrainingPageArguments {
   final int trainingId;
@@ -30,26 +30,17 @@ class _TrainingPageState extends State<TrainingPage> {
       body: Column(
         children: [
           Expanded(
-            child: CustomCard(),
-          ),
+              child: CustomButton(
+            onPressed: () {},
+            child: Text('Quiz'),
+          )),
           Expanded(
-            child: Container(
-              alignment: Alignment.center,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: CustomCard(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Quiz"),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(child: CustomCard()),
-                ],
-              ),
+            child: CustomButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/handout',
+                    arguments: HandoutPageArguments(args.trainingId));
+              },
+              child: Text('Apostilas'),
             ),
           ),
         ],
