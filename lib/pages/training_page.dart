@@ -31,7 +31,9 @@ class _TrainingPageState extends State<TrainingPage> {
         children: [
           Expanded(
               child: CustomButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/quiz');
+            },
             child: Text('Quiz'),
           )),
           Expanded(

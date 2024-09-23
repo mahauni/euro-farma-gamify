@@ -30,6 +30,12 @@ class _MainPageState extends State<MainPage> {
       ),
       body: Column(
         children: [
+          ElevatedButton(
+            onPressed: () {
+              _logout(context);
+            },
+            child: Text('Logout'),
+          ),
           Expanded(
             child: ListView(
               scrollDirection: Axis.vertical,
@@ -51,10 +57,7 @@ class _MainPageState extends State<MainPage> {
                             padding: EdgeInsets.only(top: 10, bottom: 5),
                             child: Text('Training $e'),
                           ),
-                          Container(
-                            padding: EdgeInsets.only(bottom: 10),
-                            child: Icon(Icons.lock),
-                          )
+                          _buildIcon(e)
                         ],
                       ),
                       onPressed: () {
@@ -76,7 +79,17 @@ class _MainPageState extends State<MainPage> {
     if (e == 1) {
       return Container(
         padding: EdgeInsets.only(bottom: 10),
-        child: LinearProgressIndicator(),
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.only(bottom: 5),
+              child: Text('50%'),
+            ),
+            LinearProgressIndicator(
+              value: 0.5,
+            ),
+          ],
+        ),
       );
     } else {
       return Container(
@@ -84,5 +97,9 @@ class _MainPageState extends State<MainPage> {
         child: Icon(Icons.lock),
       );
     }
+  }
+
+  void _logout(BuildContext context) {
+    Navigator.pushReplacementNamed(context, '/login');
   }
 }
